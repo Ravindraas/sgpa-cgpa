@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGPA, CGPA, and Percentage Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input, button { padding: 10px; margin: 10px; }
+        .result { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>SGPA, CGPA, and Percentage Calculator</h2>
+    <form id="marksForm">
+        <label for="marks1">Enter Marks for Subject 1 (Out of 100): </label>
+        <input type="number" id="marks1" required><br>
+
+        <label for="marks2">Enter Marks for Subject 2 (Out of 100): </label>
+        <input type="number" id="marks2" required><br>
+
+        <label for="marks3">Enter Marks for Subject 3 (Out of 100): </label>
+        <input type="number" id="marks3" required><br>
+
+        <label for="marks4">Enter Marks for Subject 4 (Out of 100): </label>
+        <input type="number" id="marks4" required><br>
+
+        <label for="marks5">Enter Marks for Subject 5 (Out of 100): </label>
+        <input type="number" id="marks5" required><br>
+
+        <label for="marks6">Enter Marks for Subject 6 (Out of 100): </label>
+        <input type="number" id="marks6" required><br>
+
+        <button type="button" onclick="calculateResults()">Calculate</button>
+    </form>
+
+    <div class="result" id="resultDiv"></div>
+
+    <script>
+        function calculateResults() {
+            // Get the marks from input
+            const marks = [
+                parseFloat(document.getElementById('marks1').value),
+                parseFloat(document.getElementById('marks2').value),
+                parseFloat(document.getElementById('marks3').value),
+                parseFloat(document.getElementById('marks4').value),
+                parseFloat(document.getElementById('marks5').value),
+                parseFloat(document.getElementById('marks6').value),
+            ];
+
+            // Ensure all marks are valid numbers
+            if (marks.some(isNaN)) {
+                alert("Please enter valid marks for all subjects.");
+                return;
+            }
+
+            // Calculate SGPA
+            const totalMarks = marks.reduce((sum, mark) => sum + mark, 0);
+            const sgpa = totalMarks / marks.length;
+
+            // Calculate Percentage
+            const percentage = (totalMarks / (marks.length * 100)) * 100;
+
+            // Calculate CGPA (assuming maximum grade points per subject is 10)
+            const cgpa = sgpa / 10;
+
+            // Show the results
+            const resultDiv = document.getElementById('resultDiv');
+            resultDiv.innerHTML = `
+                <p><strong>SGPA: </strong>${sgpa.toFixed(2)}</p>
+                <p><strong>CGPA: </strong>${cgpa.toFixed(2)}</p>
+                <p><strong>Percentage: </strong>${percentage.toFixed(2)}%</p>
+            `;
+        }
+    </script>
+</body>
+</html>
